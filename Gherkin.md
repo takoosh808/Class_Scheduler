@@ -189,3 +189,70 @@ When the Admin clicks the "Search" button,
 And the information does not align with any student,
 Then the Admin should remain on the search page,
 And the search page should display "No Student Found."
+
+# Feature: Student searches for course
+## User Story
+### As a Student, I want to be able to search for courses, So that I can register for a specific course I need
+
+## Scenarios
+### Scenario: Search course by name
+
+Given the user is on the course search page,
+When the user enters "BIO 106" in the 'Search by Keyword' section, Then clicks search,
+Then the user will see the BIO 106 course displayed to them
+
+### Scenario: Search for a course that does not exist
+
+Given the user is on the course search page,
+When the user enters "Roblox 101" in the 'Search by Keyword' section, Then clicks search
+Then the message "No courses of this name found" will be displayed to the user
+
+### Scenario: Student searches by subject
+
+Given the user is on the course search page,
+When the user selects MATH in the 'Search by Subject' section, Then clicks search
+Then all courses in the MATH subject will be displayed to the user
+
+### Scenario: Student searches by course range
+
+Given the user is on the course search page,
+When the user enters "100-199" in the 'Search by Range' section, Then clicks search
+Then all courses in the 100 level will be displayed
+
+# Feature: Admin manually enrolls student for a class
+## User Story
+### As an Admin (Advisor), I want to manually register a student for a course, So that I can place students in a course they would otherwise be unable to take
+
+## Scenarios
+### Scenario: Student meets requirements and course is not full
+
+Given the Admin is on the student enrollment Admin page for a particular class,
+When the admin enters a student in an input form,
+And the student has the required prerequesites,
+And the course is not full,
+Then when the admin submits the request,
+The student is enrolled in the course
+
+### Scenario: Class is full
+
+Given the Admin is on the student enrollment Admin page for a particular class,
+When the admin enters a student in an input form,
+And the course is full,
+And the student has the required prerequesites,
+Then when the admin submits the request,
+A display message is sent to the admin that says "The class is full. Do you want to increase the class size?"
+And a window prompts the admin to choose "Yes" or "No"
+Then if the admin chooses yes, the class size is increased by one and the student is enrolled
+And if the admin chooses no, then the window will be closed and the student will not be enrolled
+
+### Scenario: Student does not have the required prerequisites
+
+Given that the Admin is on the student enrollment Admin page for a particular class,
+When the admin enters a student in an input form,
+And the student does not have the required prerequesites,
+And the course is not full,
+Then when the admin submits the request,
+A display message is sent to the admin that says "Warning! This student does not have the required prerequesites to take this course. Continue enrolling the student for ${courseName}?"
+And a window prompts the admin to choose "Yes" or "No"
+Then if the admin chooses yes, the student will be enrolled in the course
+And if the admin chooses no, then the window will be closed and the student will not be enrolled
