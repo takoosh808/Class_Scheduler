@@ -1,3 +1,93 @@
+# Feature: User Login
+## User Story
+### As a user, I want to have the ability to login, so I can access my account.
+
+## Scenarios
+### Scenario: Valid Login
+
+Given I am on the login page,
+And I typed in the username and password correctly,
+When I click the “Login” button,
+Then I should be redirected to my dashboard.
+
+### Scenario: Invalid username/password
+
+Given I am on the login page,
+And I typed in the username or password incorrectly,
+When I click the “Login” button,
+Then I should be shown an “incorrect username/password” message,
+And should stay on the login page.
+
+### Scenario: Blank username/password
+
+Given I am on the login page,
+And I left the username or password field blank,
+When I click the “Login” button,
+Then I should be shown a “username/password required” message,
+And I should stay on the login page.
+# Feature: Enroll in classes
+## User Story
+### As a student, I want to have the ability to enroll in classes, so I confirm my classes.
+
+## Scenarios
+### Scenario: Valid enrollment
+
+Given I am on the shopping cart page,
+And there are classes on my shopping cart,
+And none of the classes conflict,
+When I click the “Enroll” button,
+Then I should be shown a “Successful enrollment” message,
+And my shopping cart should be cleared,
+And my enrollment should be updated in the database,
+And I should stay on the shopping cart page.
+
+### Scenario: No classes selected
+Given I am on the shopping cart page,
+And there are no classes in my shopping cart,
+When I click the “Enroll” button,
+Then I should be shown a “No class in shopping cart” message,
+And I should stay on the shopping cart page.
+
+### Scenario: Conflicting classes
+	
+Given I am on the shopping cart page,
+And there are classes in my shopping cart,
+And some classes conflict,
+When I click the “Enroll” button,
+Then I should be shown a “Conflicting classes” message
+And I should stay on the shopping cart page.
+
+# Feature: Generating visual class schedule
+## User Story
+### As a student, I want to have the ability to generate a visual class schedule, so I can keep track of my classes.
+
+## Scenarios
+### Scenario: Valid class schedule generation
+
+Given I am on the shopping cart page,
+And I have classes in my shopping cart,
+When I click on the “Generate schedule" button,
+Then, a visual class schedule should be generated,
+And, that visual class schedule should be shown on screen.
+
+### Scenario: No classes selected
+
+Given I am on the shopping cart page,
+And I have no classes in my shopping cart,
+When I click on the “Generate schedule" button,
+Then, a “No classes in shopping cart” message should be displayed.
+And I should stay on the shopping cart page.
+
+### Scenario: Conflicting class schedule
+
+Given I am on the shopping cart page,
+And I have conflicting classes on my schedule,
+When I click “Generate schedule” button,
+Then a visual schedule should be generated with the conflicting classes highlighted,
+And a “Conflicting classes” message should be shown,
+And the visual class schedule should be displayed.	
+
+
 # Feature: Admin creates a new class
 ## User Story 
 ### As a register Admin, I want to be able to add a class to the list of available classes, so that any time a new class is created, it can be added by students to their schedule.
