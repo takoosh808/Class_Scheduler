@@ -1,4 +1,4 @@
-@import "./assets/css/variables.css";
+@import "../../assets/css/variables.css";
 
 :root{
   background-color: var(--background-primary);

@@ -1,12 +1,17 @@
-# React + Vite
+# Class Scheduler
+### Brian Leung, Ben Metzger, Travis Takushi
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Documentation for Sprint 1 Frontend
+- Main layout created
+- Basic login authentication implemented
+    - Needs to communicate with backend to verify credentials
+    - Using *server.js* to send token
+- Basic styling
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+# Testing and Using Sprint 1 Frontend
+- Gets token from 
+```
+server.js
+```
+and stores in sessionStorage. Any username/password will get the token for the time being.
+sessionStorage will clear the token when the window is closed. Alternatively we can use localStorage to save token outside of window (tradoff is security)
