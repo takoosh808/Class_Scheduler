@@ -1,0 +1,33 @@
+@import '../../assets/css/variables.css';
+#aside{
+    position: fixed;
+    width:20%;
+    height:100%;
+    min-height: 100vh;
+    display: block;
+    background:var(--container-primary);
+    border-right:1px solid #000;
+}
+
+.card{
+    cursor: pointer;
+    position:relative;
+    width: 100%;
+    border-bottom: 1px solid #000;
+    border-left:0px;
+    border-right:0px;
+    border-radius: 0;
+    padding-top: 10px;
+    padding-bottom:10px;
+    margin: 0;
+    left:0;
+    background:var(--container-primary);
+    overflow:hidden;
+    float:left;
+}
+
+.card:hover{
+    border-color:var(--hover-border);
+    border-style:dotted;
+    border-width:2px;
+}
