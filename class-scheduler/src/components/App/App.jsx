@@ -1,23 +1,26 @@
 import React,{useState} from "react"
 import {BrowserRouter, Route, Routes} from "react-router-dom"
-import ClassSearch from './components/ClassSearch/ClassSearch'
-import Drop from './components/Drop/Drop'
-import Enroll from './components/Enroll/Enroll'
-import Header from './components/Header/Header'
-import Login from "./components/Login/Login"
-import Sidebar from './components/Sidebar/Sidebar'
-import ShoppingCart from './components/ShoppingCart/ShoppingCart'
-import ViewClasses from "./components/ViewClasses/ViewClasses"
-import WeeklySchedule from "./components/WeeklySchedule/WeeklySchedule"
+import ClassSearch from '../ClassSearch/ClassSearch'
+import Drop from '../Drop/Drop'
+import Enroll from '../Enroll/Enroll'
+import Header from '../Header/Header'
+import Login from "../Login/Login"
+import Sidebar from '../Sidebar/Sidebar'
+import ShoppingCart from '../ShoppingCart/ShoppingCart'
+import ViewClasses from "../ViewClasses/ViewClasses"
+import WeeklySchedule from "../WeeklySchedule/WeeklySchedule"
+import useToken from './useToken'
 
 import './App.css'
 
+
 function App() {
-  //Next step is adding the login system
-  // const [token, setToken]=useState();
-  // if(!token){
-  //   return <Login token={token}/>
-  // }
+  const {token,setToken} = useToken();
+
+
+  if(!token){
+    return <Login setToken={setToken}/>
+  }
   
   return (
     <BrowserRouter>
