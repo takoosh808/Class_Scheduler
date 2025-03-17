@@ -15,13 +15,11 @@ CREATE TABLE Courses (
 );
 
 CREATE TABLE StudentCourses (
-    Studentid VARCHAR(8),
-    Courseid VARCHAR(8),
-    PRIMARY KEY (Studentid, Courseid),
-    FOREIGN KEY (Studentid) REFERENCES Student(id_number),
-    FOREIGN KEY (Courseid) REFERENCES Courses(Courseid)
+    Studentid VARCHAR(8) REFERENCES Student(id_number),
+    Courseid VARCHAR(8) REFERENCES Courses(Courseid),
 );
 
+insert into StudentCourses (Studentid, Courseid) values ('49103962', '1000');
 
 insert into Student (id_number, first_name, last_name) values ('49103962', 'Alfons', 'Fairnington');
 insert into Student (id_number, first_name, last_name) values ('16966166', 'Dimitry', 'Terris');
