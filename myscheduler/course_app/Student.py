@@ -1,5 +1,6 @@
 from User import User
 from ShoppingCart import ShoppingCart
+from Class import Class
 class Student(User):
     def __init__(self, username: str, password: str, student_id: str, name: str, class_standing: int):
         super().__init__(username, password)
@@ -24,10 +25,14 @@ class Student(User):
         results = []
         return results
 
-    def AddToShoppingCart(self, class_id: str): #NOT YET WORKING
-        if class_id not in self.ShoppingCart:
-            self.ShoppingCart.append(class_id)
-            #Place holder for success message
+    def AddToShoppingCart(self, class_: Class): #NOT YET WORKING
+        if class_.ClassID not in self.ShoppingCart:
+            if class_.CheckCoursePre_Reqs(self.ClassesTaken):
+                self.ShoppingCart.append(class_id)
+                 #Place holder for success message
+            else:
+                print(f"Pre-reqs not met") # Place holder message
         else:
             # Place holder for failed message
             print(f"Class {class_id} is already in the shopping cart.")
+    
