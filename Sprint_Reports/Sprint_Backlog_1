@@ -1,0 +1,41 @@
+User Story/Issue 1: Setup Basic Frontend #9
+Create Basic Web components
+Set up the main pages of the website using HTML and CSS
+
+Create framework that we can integrate backend and database with
+
+User Story/Issue 2: Setup Basic Backend #10
+Set up Django Environment
+Set up basic Django environment and try to connect with frontend code to set groundwork to complete first user stories.
+
+User Story/Issue 3: Setup Basic Database #11
+Set up PostgreSQL Database
+Create basic tables for student and courselist with associated attributes so we can populate with sample data for our test cases
+
+User Story/Issue 4: Log-In #01
+As a user
+I need the ability to login
+So that I can access my account
+
+Details and Assumptions
+User needs to login to access their information and register for courses. Login is validated by a username and password
+
+Acceptance Criteria
+Given I am on the login page,
+And I typed in the username and password correctly,
+When I click the “Login” button,
+Then I should be redirected to my dashboard
+
+Rejection Criteria
+Given I am on the login page,
+And I typed in the username or password incorrectly,
+When I click the “Login” button,
+Then I should be shown an “incorrect username/password” message,
+And should stay on the login page
+
+Blank response
+Given I am on the login page,
+And I left the username or password field blank,
+When I click the “Login” button,
+Then I should be shown a “username/password required” message,
+And I should stay on the login page.
