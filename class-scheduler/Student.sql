@@ -11,7 +11,7 @@ CREATE TABLE Courses (
     CourseName VARCHAR(50),
     CourseTime TIME,
     CourseLocation VARCHAR(50),
-    CourseDate DATE
+    CourseDate VARCHAR(3)
 );
 
 CREATE TABLE StudentCourses (
@@ -1023,3 +1023,8 @@ insert into Student (id_number, first_name, last_name) values ('82171301', 'Odey
 insert into Student (id_number, first_name, last_name) values ('14853437', 'Orson', 'Lymbourne');
 insert into Student (id_number, first_name, last_name) values ('77550850', 'Curr', 'Toulch');
 insert into Student (id_number, first_name, last_name) values ('48240284', 'Stafford', 'Yeskov');
+
+insert into Courses (Courseid, CourseName, CourseTime, CourseLocation, CourseDate) values ('1000', 'Math 101', '3:15:00','MWF');
+insert into Courses (Courseid, CourseName, CourseTime, CourseLocation, CourseDate) values ('1001', 'English 101', '3:15:00','MWF');
+insert into Courses (Courseid, CourseName, CourseTime, CourseLocation, CourseDate) values ('1002', 'Cpts 101', '3:15:00','TTH');
+insert into Courses (Courseid, CourseName, CourseTime, CourseLocation, CourseDate) values ('1003', 'Chemistry 101', '3:15:00','MWF');
