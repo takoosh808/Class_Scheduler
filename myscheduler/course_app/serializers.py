@@ -1,17 +1,16 @@
 from rest_framework import serializers
-from .models import Course
+from .models import Student
 
-class CourseSerializer(serializers.ModelSerializer):
+class StudentSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Course
-        fields = ["id_number", "name", "slug", "image", "category"]
+        model = Student
+        fields = ["username", "password"]
+        extra_kwargs = {'password': {'write_only': True}}
 
-class DetailedCourseSerializer(serializers.ModelSerializer):
-    prerequisites=serializers.SerializerMethodField()
-    class Meta:
-        fileds = ["id_number", "name", "slug", "image", "category", "prerequisites"]
-
-        def getPrerequisites(self, course):
-            courses = Course.objects.filter(category=course.category).exclude(id_number=course.id_number)
-            serializer=CourseSerializer(courses, many=True)
-            return serializer.data
+     def create(self, validated_data):
+        user = Student(
+            username=validated_data['username'],
+        )
+        user.set_password(validated_data['password'])
+        user.save()
+        return user
