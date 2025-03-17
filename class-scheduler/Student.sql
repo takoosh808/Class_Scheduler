@@ -1,7 +1,9 @@
 CREATE TABLE Student (
     id_number VARCHAR(8) PRIMARY KEY,
     first_name VARCHAR(50),
-    last_name VARCHAR(50)
+    last_name VARCHAR(50),
+    username VARCHAR(20),
+    password VARCHAR(20)
 );
 
 CREATE TABLE Courses (
