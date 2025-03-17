@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'core',
     'course_app',
     'rest_framework',
+    'rest_framework.authtoken',
+    'accounts',
     'corsheaders'
 ]
 
