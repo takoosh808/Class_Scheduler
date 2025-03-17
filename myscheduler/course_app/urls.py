@@ -1,11 +1,8 @@
 from django.urls import path
-from . import views
-from django.conf import settings
-from django.conf.urls.static import static
+from .views import register_student, user_login, user_logout
 
-urlpatterns =[
-    path("courses", views.courses, name = "courses"),
-    path("course_detail/<slug:slug>", views.course_detail, name="course_detail")
+urlpatterns = [
+    path('register/', register_student, name='register'),
+    path('login/', user_login, name='login'),
+    path('logout/', user_logout, name='logout'),
 ]
-
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
