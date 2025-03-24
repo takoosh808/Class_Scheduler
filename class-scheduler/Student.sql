@@ -1,3 +1,7 @@
+CREATE DATABASE class_scheduler;
+CREATE USER myprojectuser WITH PASSWORD 'password';
+GRANT ALL PRIVILEGES ON DATABASE class_scheduler TO myprojectuser;
+
 CREATE TABLE Student (
     id_number VARCHAR(8) PRIMARY KEY,
     first_name VARCHAR(50),

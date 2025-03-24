@@ -94,11 +94,11 @@ WSGI_APPLICATION = 'myscheduler.wsgi.application'
 DATABASES = {
     'Default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Course',
+        'NAME': 'class_scheduler',
         'USER': 'myuser',
-        'PASSWORD': 'mypass',
+        'PASSWORD': 'password',
         'HOST': 'localhost', 
-        'PORT': '5432',       
+        'PORT': '',       
     }
 }
 
