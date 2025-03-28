@@ -92,13 +92,9 @@ WSGI_APPLICATION = 'myscheduler.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'Default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'class_scheduler',
-        'USER': 'myuser',
-        'PASSWORD': 'password',
-        'HOST': 'localhost', 
-        'PORT': '',       
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase'     
     }
 }
 
