@@ -11,28 +11,39 @@ class Student(User):
         self.CurrentClasses = []  # List of currently enrolled class IDs
         self.ShoppingCart = ShoppingCart()  # List of classes in shopping cart
 
-    def DropClasses(self, class_id: str):
+    # Returns the contents of shopping cart, in a string.
+    # def GetShoppingCart(self):
+    #     return ",".join(self.ShoppingCart.GetClasses())
+
+    # Drops a class given the course ID. Returns bool indicating whether successful or not.
+    def DropClass(self, class_id: str):
         if class_id in self.CurrentClasses:
             self.CurrentClasses.remove(class_id)
-            self.ClassesTaken.append(class_id)
-            #Place holder for success message
+            return True
         else:
-            # Place holder for failed message
-            print(f"Class {class_id} not found in current classes.")
+            return False
 
-    def SearchClasses(self, available_classes: list, keyword: str): #NOT YET WORKING
-        # Place holder for search classes
-        results = []
-        return results
+    # def SearchClasses(self, available_classes: list, keyword: str): #NOT YET WORKING
+    #     # Place holder for search classes
+    #     results = []
+    #     return results
 
-    def AddToShoppingCart(self, class_: Class): #NOT YET WORKING
-        if class_.ClassID not in self.ShoppingCart:
-            if class_.CheckCoursePre_Reqs(self.ClassesTaken):
-                self.ShoppingCart.append(class_id)
-                 #Place holder for success message
-            else:
-                print(f"Pre-reqs not met") # Place holder message
-        else:
-            # Place holder for failed message
-            print(f"Class {class_id} is already in the shopping cart.")
+    # Adds a course to shopping cart given a class ID. Returns bool indicating whether successful or not.
+    def AddToShoppingCart(self, class_id : str):
+        return self.ShoppingCart.AddToCart(class_id)
     
+    # Removes a class from shopping cart given class ID. Returns a bool indicating success.
+    def RemoveFromShoppingCart(self, class_id: str):
+        return self.ShoppingCart.RemoveClass(class_id)
+
+    # Enroll in classes in shopping cart. Returns bool indicating whether enrollment successful or not.
+    def Enroll(self): # NEEDS TO CHECK TIME CONFLICT AGAIN
+        if not self.ShoppingCart.CheckClassConflict():
+            for class_id in self.ShoppingCart.FutureCourses:
+                if class_id in self.CurrentClasses:
+                    return False
+            self.CurrentClasses = self.ShoppingCart.FutureCourses
+            self.ShoppingCart.ClearCart()
+            return True
+        else:
+            return False

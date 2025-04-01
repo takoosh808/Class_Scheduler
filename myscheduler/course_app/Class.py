@@ -17,6 +17,3 @@ class Class:
     
     def ChangeAvailableSeats(self, change: int):
         self.AvailableSeats += change
-
-    def CheckCoursePre_Reqs(self, pre_req: list):
-        return all(item in pre_req for item in self.PreReqs)
