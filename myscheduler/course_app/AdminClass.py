@@ -24,8 +24,4 @@ class Admin(User):
             return False
         
     def CheckClassConflict(self, class_:Class):#NOT YET DONE
-        return False
-
-    def CreateNewStudent(self, username: str, password: str, student_id: str, name: str, class_standing: int):
-        1 + 1
-        # just write a new student in database
+         return False
