@@ -1,24 +1,21 @@
-CREATE DATABASE class_scheduler;
-CREATE USER myprojectuser WITH PASSWORD 'password';
-GRANT ALL PRIVILEGES ON DATABASE class_scheduler TO myprojectuser;
+CREATE DATABASE courseapp;
+CREATE USER admin WITH PASSWORD 'Cpts322';
+GRANT ALL PRIVILEGES ON DATABASE courseapp TO admin;
 
 CREATE TABLE Student (
     id_number VARCHAR(8) PRIMARY KEY,
-    first_name VARCHAR(50),
-    last_name VARCHAR(50),
-    username VARCHAR(20),
+    name VARCHAR(50),
     password VARCHAR(20)
 );
 
 CREATE TABLE Courses (
-    Courseid VARCHAR(4) PRIMARY KEY,
-    CourseName VARCHAR(50),
-    CourseTime TIME,
-    CourseLocation VARCHAR(50),
+    Courseid VARCHAR(8) PRIMARY KEY,
+    CourseName VARCHAR(10),
+    CourseTime VARCHAR(4),
     CourseDate VARCHAR(3)
 );
 
-CREATE TABLE StudentCourses (
+CREATE TABLE Prerequesites (
     Studentid VARCHAR(8) REFERENCES Student(id_number),
     Courseid VARCHAR(8) REFERENCES Courses(Courseid),
 );
