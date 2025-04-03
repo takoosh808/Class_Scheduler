@@ -5,6 +5,7 @@ class CourseSerializer(ModelSerializer):
     class Meta:
         model = Course
         fields = ('id_number', 'class_name', 'date', 'time')
+<<<<<<< HEAD
 
 
 class StudentSerializer(ModelSerializer):
@@ -12,3 +13,5 @@ class StudentSerializer(ModelSerializer):
         model = Student
         fields = ('id_number', 'name', 'password')
         
+=======
+>>>>>>> ben2

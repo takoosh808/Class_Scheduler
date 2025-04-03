@@ -7,4 +7,8 @@ class User:
         if self.Username == username and self.Password == password:
             return True
         else:
+<<<<<<< HEAD
             return False
+=======
+            return False
+>>>>>>> ben2

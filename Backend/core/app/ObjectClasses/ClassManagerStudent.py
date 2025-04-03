@@ -26,6 +26,7 @@ def CreateClass(class_id:str):#NOT YET WORKING
 class ClassManagerStudent:
     def __init__(self, student_ID:str): #pass in database?
         self.student = CreateStudent(student_ID)# find and create student instance from student ID
+<<<<<<< HEAD
         self.classList = [] #read class list from database
         self.studentList = [] #read student list from database
 
@@ -50,4 +51,34 @@ class ClassManagerStudent:
 
     def Enroll(self):
         return self.student.Enroll()
+=======
+
+# Returns true or false indicating success.
+    def AddToShoppingCart(self, class_ID:str):
+        return json.load(json.dumps(self.student.AddToShoppingCart(class_ID)))
+        #maybe not
+        #pass in class_ID as class object instead. So we can check conflict. Change student and shopping cart to store class objects, instead of class ID.
+
+# Returns true or false indicating success.
+    def RemoveFromShoppingCart(self, class_ID:str):
+        return json.load(json.dumps(self.student.RemoveFromShoppingCart(class_ID)))
+        #pass in class_ID as class object instead. So we can check conflict. Change student and shopping cart to store class objects, instead of class ID.
+
+# Returns list of classes.
+    def GetShoppingCart(self):
+        return json.load(json.dumps(",".join(self.student.ShoppingCart.GetClasses())))
+    
+# Returns list of classes.
+    def GetCurrentClass(self):
+        return json.load(json.dumps(",".join(self.student.CurrentClasses)))
+
+# Returns true or false indicating success.
+    def DropClass(self, class_ID: str):
+        return json.load(json.dumps(self.student.DropClass(class_ID)))
+        #Change seat avaibility
+
+# Returns true or false indicating success.
+    def Enroll(self):
+        return json.load(json.dumps(self.student.Enroll()))
+>>>>>>> ben2
         #change seat avaibility

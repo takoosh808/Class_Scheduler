@@ -5,7 +5,11 @@ GRANT ALL PRIVILEGES ON DATABASE courseapp TO admin;
 CREATE TABLE Student (
     id_number VARCHAR(8) PRIMARY KEY,
     name VARCHAR(50),
+<<<<<<< HEAD:class-scheduler/Student.sql
     password VARCHAR(50)
+=======
+    password VARCHAR(20)
+>>>>>>> ben2:Frontend/Student.sql
 );
 
 CREATE TABLE Courses (
@@ -15,7 +19,11 @@ CREATE TABLE Courses (
     CourseDate VARCHAR(3)
 );
 
+<<<<<<< HEAD:class-scheduler/Student.sql
 CREATE TABLE Prerequisites (
+=======
+CREATE TABLE Prerequesites (
+>>>>>>> ben2:Frontend/Student.sql
     Studentid VARCHAR(8) REFERENCES Student(id_number),
     Courseid VARCHAR(8) REFERENCES Courses(Courseid),
 );

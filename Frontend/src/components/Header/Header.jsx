@@ -1,10 +1,14 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useLocation } from 'react-router-dom';
 import './Header.css'
+import './Profile/Profile.jsx'
+import { Profile } from './Profile/Profile.jsx';
 
 
-export default function Header({title="title"}) {
+export default function Header({name="name"}) {
     const navigate = useNavigate();
+    const location = useLocation();
+    const title = getTitle(location.pathname)
     function handleHamburgerClick(){
         console.log("Menu clicked");
     }
@@ -12,9 +16,13 @@ export default function Header({title="title"}) {
         console.log("Navigating to '/shopping-cart'");
         navigate('/shopping-cart')
     }
-    function handleProfileClick(){
-        console.log("Profile clicked");
+    function getTitle(path){
+        let newPath = path.replace(/[-]/g," ");
+        newPath = newPath.replace(/[//]/g,"")
+        return newPath.charAt(0).toUpperCase() + newPath.slice(1);
+
     }
+  
 
 
   return (
@@ -34,15 +42,12 @@ export default function Header({title="title"}) {
                     e.stopPropagation();
                     handleBasketClick();
                 }}></span>
-                <span className="int-icon icon-user" onClick={e=>{
-                    e.stopPropagation();
-                    handleProfileClick();
-                }}></span>
+                <Profile name="User1"/>
             </div>
             
         </div>
         <div className="row">
-            <b className="user-text">Logged in as user: User1</b>
+            <b className="user-text">Logged in as user: {name}</b>
         </div>
     </div>
   )

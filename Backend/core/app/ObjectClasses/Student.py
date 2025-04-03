@@ -1,6 +1,10 @@
 from User import User
 from ShoppingCart import ShoppingCart
 from Class import Class
+<<<<<<< HEAD
+=======
+from AdminClass import ChangeAvailableSeats
+>>>>>>> ben2
 class Student(User):
     def __init__(self, username: str, password: str, student_id: str, name: str, class_standing: int, shopping_Cart:list):
         super().__init__(username, password)
@@ -21,6 +25,10 @@ class Student(User):
     def DropClass(self, class_id: str):
         if class_id in self.CurrentClasses:
             self.CurrentClasses.remove(class_id)
+<<<<<<< HEAD
+=======
+            ChangeAvailableSeats(class_id, 1)
+>>>>>>> ben2
             return True
         else:
             return False
@@ -44,8 +52,17 @@ class Student(User):
             for class_id in self.ShoppingCart.FutureCourses:
                 if class_id in self.CurrentClasses:
                     return False
+<<<<<<< HEAD
+=======
+                else:
+                    ChangeAvailableSeats(class_id, -1)
+>>>>>>> ben2
             self.CurrentClasses = self.ShoppingCart.FutureCourses
             self.ShoppingCart.ClearCart()
             return True
         else:
+<<<<<<< HEAD
             return False
+=======
+            return False
+>>>>>>> ben2

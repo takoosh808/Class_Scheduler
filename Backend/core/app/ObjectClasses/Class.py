@@ -16,4 +16,8 @@ class Class:
         return self.Location
     
     def ChangeAvailableSeats(self, change: int):
+<<<<<<< HEAD
         self.AvailableSeats += change
+=======
+        self.AvailableSeats += change
+>>>>>>> ben2

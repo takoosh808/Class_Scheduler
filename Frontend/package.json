@@ -10,6 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+<<<<<<< HEAD:class-scheduler/package.json
+=======
+    "@headlessui/react": "^2.2.0",
+>>>>>>> ben2:Frontend/package.json
     "axios": "^1.8.4",
     "prop-types": "^15.8.1",
     "react": "^19.0.0",
