@@ -1,8 +1,9 @@
 from User import User
 from ShoppingCart import ShoppingCart
 from Class import Class
+from AdminClass import ChangeAvailableSeats
 class Student(User):
-    def __init__(self, username: str, password: str, student_id: str, name: str, class_standing: int):
+    def __init__(self, username: str, password: str, student_id: str, name: str, class_standing: int, shopping_Cart:list):
         super().__init__(username, password)
         self.StudentID = student_id
         self.Name = name
@@ -10,6 +11,8 @@ class Student(User):
         self.ClassesTaken = []  # List of completed class IDs
         self.CurrentClasses = []  # List of currently enrolled class IDs
         self.ShoppingCart = ShoppingCart()  # List of classes in shopping cart
+        for course in shopping_Cart:
+            self.AddToShoppingCart(course)
 
     # Returns the contents of shopping cart, in a string.
     # def GetShoppingCart(self):
@@ -19,6 +22,7 @@ class Student(User):
     def DropClass(self, class_id: str):
         if class_id in self.CurrentClasses:
             self.CurrentClasses.remove(class_id)
+            ChangeAvailableSeats(class_id, 1)
             return True
         else:
             return False
@@ -42,6 +46,8 @@ class Student(User):
             for class_id in self.ShoppingCart.FutureCourses:
                 if class_id in self.CurrentClasses:
                     return False
+                else:
+                    ChangeAvailableSeats(class_id, -1)
             self.CurrentClasses = self.ShoppingCart.FutureCourses
             self.ShoppingCart.ClearCart()
             return True
