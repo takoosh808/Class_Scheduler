@@ -6,7 +6,7 @@ Set up the main pages of the website using HTML and CSS
 Create framework that we can integrate backend and database with
 
 User Story/Issue 2: Setup Basic Backend #10
-Team Member: Bryan
+Team Member: Brian
 Set up Django Environment
 Set up basic Django environment and try to connect with frontend code to set groundwork to complete first user stories.
 

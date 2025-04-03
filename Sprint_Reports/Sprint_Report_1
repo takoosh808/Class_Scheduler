@@ -1,60 +1,51 @@
 # Sprint x Report
-Video Link:
+Video Link: https://youtu.be/B6gfKBOh-zk
 ## What's New (User Facing)
 * Log-In
 * Set-Up Front-End/Back-End/Database
 ## Work Summary (Developer Facing)
-Provide a one paragraph synposis of what your team accomplished this sprint. Don't
-repeat the "What's New" list of features. Instead, help the instructor understand
-how you went about the work described there, any barriers you overcame, and any
-significant learnings for your team.
+We each split up the work as one person doing the front-end, one person doing the back-end, and one person doing the database. 
+This way, we could work individually while still working towards a cohesive goal. However, this created issues, as it became difficult
+to link our work together in to a coherent project. However, we were still able to finish and complete all of our issues.
 ## Unfinished Work
-If applicable, explain the work you did not finish in this sprint. For issues/user
-stories in the current sprint that have not been closed, (a) any progress toward
-completion of the issues has been clearly tracked (by checking the checkboxes of
-acceptance criteria), (b) a comment has been added to the issue to explain why the
-issue could not be completed (e.g., "we ran out of time" or "we did not anticipate
-it would be so much work"), and (c) the issue is added to a subsequent sprint, so
-that it can be addressed later.
+
 ## Completed Issues/User Stories
 Here are links to the issues that we completed in this sprint:
-* URL of issue 1
-* URL of issue 2
-* URL of issue n
-Desirables (Remove this section when you save the file):
-* Each issue should be assigned to a milestone
-* Each completed issue should be assigned to a pull request
-* Each completed pull request should include a link to a "Before and After" video
-* All team members who contributed to the issue should be assigned to it on
-GitHub
-* Each issue should be assigned story points using a label
-* Story points contribution of each team member should be indicated in a comment
+* https://github.com/users/takoosh808/projects/3?pane=issue&itemId=99019521&issue=takoosh808%7CClass_Scheduler%7C1
+* https://github.com/users/takoosh808/projects/3/views/1?pane=issue&itemId=99019558&issue=takoosh808%7CClass_Scheduler%7C9
+* https://github.com/users/takoosh808/projects/3/views/1?pane=issue&itemId=99019562&issue=takoosh808%7CClass_Scheduler%7C10
+* https://github.com/users/takoosh808/projects/3/views/1?pane=issue&itemId=99019564&issue=takoosh808%7CClass_Scheduler%7C11
 ## Incomplete Issues/User Stories
 Here are links to issues we worked on but did not complete in this sprint:
-* URL of issue 1 <<One sentence explanation of why issue was not completed>>
-* URL of issue 2 <<One sentence explanation of why issue was not completed>>
-* URL of issue n <<One sentence explanation of why issue was not completed>>
-Examples of explanations (Remove this section when you save the file):
-* "We ran into a complication we did not anticipate (explain briefly)."
-* "We decided that the feature did not add sufficient value for us to work on it
-in this sprint (explain briefly)."
-* "We could not reproduce the bug" (explain briefly).
-* "We did not get to this issue because..." (explain briefly)
+* https://github.com/users/takoosh808/projects/3/views/1?pane=issue&itemId=99019546&issue=takoosh808%7CClass_Scheduler%7C6
+  * We postponed this issue due to the necessity of linking the backend and database.
+* https://github.com/users/takoosh808/projects/3/views/1?pane=issue&itemId=99019527&issue=takoosh808%7CClass_Scheduler%7C2
+  * We postponed this issue due to the necessity of linking the backend and database.
+* https://github.com/users/takoosh808/projects/3/views/1?pane=issue&itemId=99019530&issue=takoosh808%7CClass_Scheduler%7C3
+  * We postponed this issue due to the necessity of linking the backend and database.
+* https://github.com/users/takoosh808/projects/3/views/1?pane=issue&itemId=99019534&issue=takoosh808%7CClass_Scheduler%7C4
+  * We postponed this issue due to the necessity of linking the backend and database.
+* https://github.com/users/takoosh808/projects/3/views/1?pane=issue&itemId=99019542&issue=takoosh808%7CClass_Scheduler%7C5
+  * We postponed this issue due to the necessity of linking the backend and database.
+* https://github.com/users/takoosh808/projects/3/views/1?pane=issue&itemId=99019552&issue=takoosh808%7CClass_Scheduler%7C7
+  * We postponed this issue due to the necessity of linking the backend and database.
+* https://github.com/users/takoosh808/projects/3/views/1?pane=issue&itemId=99019554&issue=takoosh808%7CClass_Scheduler%7C8
+  * We postponed this issue due to the necessity of linking the backend and database.
+* https://github.com/users/takoosh808/projects/3/views/1?pane=issue&itemId=102162998&issue=takoosh808%7CClass_Scheduler%7C13
+  * We postponed this issue due to the necessity of linking the backend and database.
 ## Code Files for Review
 Please review the following code files, which were actively developed during this
 sprint, for quality:
-* [Name of code file 1](https://github.com/your_repo/file_extension)
-* [Name of code file 2](https://github.com/your_repo/file_extension)
-* [Name of code file 3](https://github.com/your_repo/file_extension)
+* https://github.com/takoosh808/Class_Scheduler/tree/main/myscheduler
+* https://github.com/takoosh808/Class_Scheduler/tree/main/class-scheduler
 ## Retrospective Summary
 Here's what went well:
-* Item 1
-* Item 2
-* Item x
+* We completed all the issues we wanted for this sprint
+* We were able to merge our project into one product
+* We were able to create and split up the project well and everyone played a role in creating the project
 Here's what we'd like to improve:
-* Item 1
-* Item 2
-* Item x
+* We should push code more to github
+* We will work together more, rather than splitting up the work so much
 Here are changes we plan to implement in the next sprint:
-* Item 1
-* Item 2
+* Working together on all three parts of the stack, rather than individual
+* Pushing after every single update to a feature

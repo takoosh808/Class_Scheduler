@@ -1,27 +1,26 @@
+CREATE DATABASE courseapp;
+CREATE USER admin WITH PASSWORD 'Cpts322';
+GRANT ALL PRIVILEGES ON DATABASE courseapp TO admin;
+
 CREATE TABLE Student (
     id_number VARCHAR(8) PRIMARY KEY,
-    first_name VARCHAR(50),
-    last_name VARCHAR(50),
-    username VARCHAR(20),
-    password VARCHAR(20)
+    name VARCHAR(50),
+    password VARCHAR(50)
 );
 
 CREATE TABLE Courses (
-    Courseid VARCHAR(4) PRIMARY KEY,
-    CourseName VARCHAR(50),
-    CourseTime TIME,
-    CourseLocation VARCHAR(50),
-    CourseDate DATE
+    Courseid VARCHAR(8) PRIMARY KEY,
+    CourseName VARCHAR(10),
+    CourseTime VARCHAR(4),
+    CourseDate VARCHAR(3)
 );
 
-CREATE TABLE StudentCourses (
-    Studentid VARCHAR(8),
-    Courseid VARCHAR(8),
-    PRIMARY KEY (Studentid, Courseid),
-    FOREIGN KEY (Studentid) REFERENCES Student(id_number),
-    FOREIGN KEY (Courseid) REFERENCES Courses(Courseid)
+CREATE TABLE Prerequisites (
+    Studentid VARCHAR(8) REFERENCES Student(id_number),
+    Courseid VARCHAR(8) REFERENCES Courses(Courseid),
 );
 
+insert into StudentCourses (Studentid, Courseid) values ('49103962', '1000');
 
 insert into Student (id_number, first_name, last_name) values ('49103962', 'Alfons', 'Fairnington');
 insert into Student (id_number, first_name, last_name) values ('16966166', 'Dimitry', 'Terris');
@@ -1023,3 +1022,8 @@ insert into Student (id_number, first_name, last_name) values ('82171301', 'Odey
 insert into Student (id_number, first_name, last_name) values ('14853437', 'Orson', 'Lymbourne');
 insert into Student (id_number, first_name, last_name) values ('77550850', 'Curr', 'Toulch');
 insert into Student (id_number, first_name, last_name) values ('48240284', 'Stafford', 'Yeskov');
+
+insert into Courses (Courseid, CourseName, CourseTime, CourseLocation, CourseDate) values ('1000', 'Math 101', '3:15:00','MWF');
+insert into Courses (Courseid, CourseName, CourseTime, CourseLocation, CourseDate) values ('1001', 'English 101', '3:15:00','MWF');
+insert into Courses (Courseid, CourseName, CourseTime, CourseLocation, CourseDate) values ('1002', 'Cpts 101', '3:15:00','TTH');
+insert into Courses (Courseid, CourseName, CourseTime, CourseLocation, CourseDate) values ('1003', 'Chemistry 101', '3:15:00','MWF');
