@@ -5,4 +5,3 @@ class CourseSerializer(ModelSerializer):
     class Meta:
         model = Course
         fields = ('id_number', 'class_name', 'date', 'time')
-        
