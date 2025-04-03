@@ -6,6 +6,11 @@ class Course(models.Model):
     class_name = models.CharField(max_length=10)
     date = models.CharField(max_length = 3)
     time = models.CharField(max_length=4)
+    PreReqs1 = models.CharField(max_length=8)
+    PreReqs2 = models.CharField(max_length=8)
+    PreReqs3 = models.CharField(max_length=8)
+    Location = models.CharField(max_length=10)
+    AvailableSeats = models.IntegerField()
 
     def __str__(self):
         return f"Course: {self.class_name}"
