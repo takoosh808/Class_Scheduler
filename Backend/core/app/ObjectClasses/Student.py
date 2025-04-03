@@ -2,11 +2,7 @@ from User import User
 from ShoppingCart import ShoppingCart
 from Class import Class
 class Student(User):
-<<<<<<< HEAD
-    def __init__(self, username: str, password: str, student_id: str, name: str, class_standing: int):
-=======
     def __init__(self, username: str, password: str, student_id: str, name: str, class_standing: int, shopping_Cart:list):
->>>>>>> main
         super().__init__(username, password)
         self.StudentID = student_id
         self.Name = name
@@ -14,11 +10,8 @@ class Student(User):
         self.ClassesTaken = []  # List of completed class IDs
         self.CurrentClasses = []  # List of currently enrolled class IDs
         self.ShoppingCart = ShoppingCart()  # List of classes in shopping cart
-<<<<<<< HEAD
-=======
         for course in shopping_Cart:
             self.AddToShoppingCart(course)
->>>>>>> main
 
     # Returns the contents of shopping cart, in a string.
     # def GetShoppingCart(self):
