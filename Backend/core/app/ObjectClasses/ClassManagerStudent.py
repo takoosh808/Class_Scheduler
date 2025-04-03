@@ -1,11 +1,6 @@
 from AdminClass import Admin
 from Student import Student
 from Class import Class
-<<<<<<< HEAD
-
-def CreateStudent(student_ID:str): #NOT YET WORKING
-    return Student("Username", "Password", student_ID, "Name", 1)
-=======
 from models import Course, Student
 import json
 
@@ -24,7 +19,6 @@ def CreateStudent(student_ID:str): #NOT YET WORKING
     shoppingCartList += obj.shoppingCart9
     shoppingCartList += obj.shoppingCart10
     return Student(obj.id_number, obj.password, student_ID, obj.name, 1)
->>>>>>> main
 
 def CreateClass(class_id:str):#NOT YET WORKING
     return Class(class_id, [], "Time", "Location", 100)
@@ -45,17 +39,10 @@ class ClassManagerStudent:
         #pass in class_ID as class object instead. So we can check conflict. Change student and shopping cart to store class objects, instead of class ID.
     
     def GetShoppingCart(self):
-<<<<<<< HEAD
-        return ",".join(self.student.ShoppingCart.GetClasses())
-    
-    def GetCurrentClass(self):
-        return ",".join(self.student.CurrentClasses)
-=======
         return json.load(",".join(self.student.ShoppingCart.GetClasses()))
     
     def GetCurrentClass(self):
         return json.load(",".join(self.student.CurrentClasses))
->>>>>>> main
     
     def DropClass(self, class_ID: str):
         return self.student.DropClass(class_ID)
