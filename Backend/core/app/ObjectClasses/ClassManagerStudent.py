@@ -39,7 +39,7 @@ class ClassManagerStudent:
         #pass in class_ID as class object instead. So we can check conflict. Change student and shopping cart to store class objects, instead of class ID.
     
     def GetShoppingCart(self):
-        return ",".join(self.student.ShoppingCart.GetClasses()).to
+        return json.load(",".join(self.student.ShoppingCart.GetClasses()))
     
     def GetCurrentClass(self):
         return json.load(",".join(self.student.CurrentClasses))
