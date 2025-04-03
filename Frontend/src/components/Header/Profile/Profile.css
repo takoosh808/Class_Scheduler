@@ -1,8 +1,22 @@
 #container{
+    display: flex;
     justify-content: center;
     justify-items: center;
-    position: absolute;
-    width: 100%;
+    position: fixed;
+    top:30%;
+    left:50%;
+    transform: (-50%,-50%);
+    width: auto;
+    z-index: 100;
+}
+
+#modal-backdrop{
+    z-index:1;
+    position: fixed;
+    inset: 0;
+    /* background: rgba(0, 0, 0, 0.3); */
+    
+
 }
 
 #contents{
