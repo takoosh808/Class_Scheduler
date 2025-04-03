@@ -2,6 +2,7 @@ from AdminClass import Admin
 from Student import Student
 from Class import Class
 from models import Course, Student
+import json
 
 
 def CreateStudent(student_ID:str): #NOT YET WORKING
@@ -38,10 +39,10 @@ class ClassManagerStudent:
         #pass in class_ID as class object instead. So we can check conflict. Change student and shopping cart to store class objects, instead of class ID.
     
     def GetShoppingCart(self):
-        return ",".join(self.student.ShoppingCart.GetClasses())
+        return ",".join(self.student.ShoppingCart.GetClasses()).to
     
     def GetCurrentClass(self):
-        return ",".join(self.student.CurrentClasses)
+        return json.load(",".join(self.student.CurrentClasses))
     
     def DropClass(self, class_ID: str):
         return self.student.DropClass(class_ID)
