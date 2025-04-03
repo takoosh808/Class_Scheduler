@@ -14,6 +14,16 @@ class Student(models.Model):
     id_number = models.CharField(max_length=8)
     name = models.CharField(max_length=30)
     password = models.CharField(max_length = 30)
+    shoppingCart1 = models.CharField(max_length=8)
+    shoppingCart2 = models.CharField(max_length=8)
+    shoppingCart3 = models.CharField(max_length=8)
+    shoppingCart4 = models.CharField(max_length=8)
+    shoppingCart5 = models.CharField(max_length=8)
+    shoppingCart6 = models.CharField(max_length=8)
+    shoppingCart7 = models.CharField(max_length=8)
+    shoppingCart8 = models.CharField(max_length=8)
+    shoppingCart9 = models.CharField(max_length=8)
+    shoppingCart10 = models.CharField(max_length=8)
 
     def __str__(self):
         return f"Course: {self.name}"   
