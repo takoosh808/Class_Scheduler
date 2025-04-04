@@ -1,0 +1,16 @@
+#container{
+    justify-content: center;
+    justify-items: center;
+    position: absolute;
+    width: 100%;
+}
+
+#contents{
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    text-align: center;
+    width: 100%;
+    padding:10px;
+    border:none;
+}

@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:ital,wght@0,200..800;1,200..800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+:root{
+    /* Variable Colors */
+    --background-primary: #EBEBEB;
+    --container-primary: #CAD2C5;
+    --button-primary: #84A98C;
+    --hover-border:#4da7a7;
+    
+    /* Typography */
+    --h1-font-size: 30px;
+    --body-font-size: 20px;
+    --container-font-size: 20px;
+
+}
