@@ -8,7 +8,7 @@ class Course(models.Model):
     time = models.CharField(max_length=4)
 
     def __str__(self):
-        return f"Course: {self.class_name}"
+        return self.class_name
     
 class Student(models.Model):
     id_number = models.CharField(max_length=8)
@@ -26,4 +26,4 @@ class Student(models.Model):
     shoppingCart10 = models.CharField(max_length=8)
 
     def __str__(self):
-        return f"Course: {self.name}"   
+        return self.name  

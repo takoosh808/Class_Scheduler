@@ -16,8 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from app.api.views import CourseViewSet
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('core.api.urls'))
+    path('api/courses/', CourseViewSet.as_view(), name='course-list')
 ]

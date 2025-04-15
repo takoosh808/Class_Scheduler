@@ -1,6 +1,10 @@
-from django.urls import path
+from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from . views import CourseViewSet
+from views import CourseViewSet
 
-course_router = DefaultRouter()
-course_router.register(r'courses', CourseViewSet)
+router = DefaultRouter()
+router.register(r'courses', CourseViewSet, basename='course')
+
+urlpatterns = [
+    path('api/', include(router.urls)),
+]

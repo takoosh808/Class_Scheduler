@@ -1,30 +1,33 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import './ClassSearch.css'
+import axios from 'axios';
 
 const ClassSearch = () => {
 
   const [searchInput, setSearchInput] = useState("");
+  const [courses, setCourses] = useState([]);
 
-  const Courses = [
-    {name: "Cpts322", id_number: "1000", date:"TTH", time:"4:10"},
-    {name: "Cpts321", id_number: "1001",date:"MWF", time:"12:10"},
-    {name: "Chem101", id_number: "2356",date:"MWF", time:"11:10"},
-    {name: "Chem105", id_number: "2045",date:"TTH", time:"12:10"},
-    {name: "Bio106", id_number: "3567",date:"MWF", time:"3:10"},
-  ];
+  useEffect(() => {
+    axios.get("http://127.0.0.1:8000/api/courses/")
+      .then((response) => {
+        setCourses(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching courses:", error);
+      });
+  }, []);
 
-  var activeItems = [];
 
   const handleChange = (e) => {
     e.preventDefault();
     setSearchInput(e.target.value);
   };
 
-  if (searchInput.length > 0) {
-      activeItems = Courses.filter((course) => {
-      return course.name.match(searchInput);
-  });
-  }
+  const filteredCourses = searchInput.length > 0
+    ? courses.filter(course =>
+        course.class_name.toLowerCase().includes(searchInput.toLowerCase())
+      )
+    : courses;
 
   return (<div>
 
@@ -42,9 +45,9 @@ const ClassSearch = () => {
             <th>Time</th>
             <th>Date</th>
         </tr>
-        {activeItems.map((course, index) => (
+        {filteredCourses.map((course, index) => (
         <tr key={index} className="result">
-          <td>{course.name}</td>
+          <td>{course.class_name}</td>
           <td>{course.id_number}</td>
           <td>{course.time}</td>
           <td>{course.date}</td>
