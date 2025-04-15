@@ -2,10 +2,16 @@ from django.db import models
 
 # Create your models here.
 class Course(models.Model):
-    id_number = models.CharField(max_length=8)
     class_name = models.CharField(max_length=10)
-    date = models.CharField(max_length = 3)
-    time = models.CharField(max_length=4)
+    id_number = models.CharField(max_length=8)
+    IsLab = models.BooleanField(default=False)
+    Section_Number = models.IntegerField(default=1)
+    Instructor = models.CharField(max_length=20, default='To Be Assigned')
+    Date = models.CharField(max_length = 3)
+    Time = models.CharField(max_length=4)
+    Location = models.CharField(max_length=10, default='To Be Assigned')
+    Enrollment_max = models.IntegerField(default=100)
+    Enrollment = models.IntegerField(default=0)
 
     def __str__(self):
         return self.class_name

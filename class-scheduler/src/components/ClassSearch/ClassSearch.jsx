@@ -41,6 +41,9 @@ const ClassSearch = () => {
     <table className="searchWrapper">
         <tr className = "title">
             <th>Course Name</th>
+            <th>Section Number</th>
+            <th>Instructor</th>
+            <th>Location</th>
             <th>SLN</th>
             <th>Time</th>
             <th>Date</th>
@@ -48,9 +51,12 @@ const ClassSearch = () => {
         {filteredCourses.map((course, index) => (
         <tr key={index} className="result">
           <td>{course.class_name}</td>
+          <td>{course.Section_Number}</td>
+          <td>{course.Instructor}</td>
+          <td>{course.Location}</td>
           <td>{course.id_number}</td>
-          <td>{course.time}</td>
-          <td>{course.date}</td>
+          <td>{course.Time}</td>
+          <td>{course.Date}</td>
         </tr>
         ))}
     </table>

@@ -20,5 +20,5 @@ from app.api.views import CourseViewSet
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/courses/', CourseViewSet.as_view(), name='course-list')
+    path('api/courses/', CourseViewSet.as_view(), name='course-excel')
 ]
