@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import './Login.css'
 
 async function loginUser(credentials){
-    return fetch('http://localhost:8080/login',{
+    console.log(credentials)
+    return fetch('http://localhost:8000/api/login/',{
         method:'POST',
         headers:{
             'Content-Type' : 'application/json'
@@ -16,12 +17,12 @@ async function loginUser(credentials){
 
 
 export default function Login({setToken}) {
-    const [username,setUsername] = useState();
+    const [id,setId] = useState();
     const [password, setPassword] = useState();
     const handleSubmit = async e=>{
         e.preventDefault();
         const token = await loginUser({
-            username,
+            id,
             password
         });
         setToken(token);
@@ -34,8 +35,8 @@ export default function Login({setToken}) {
         <form className="loginForm" onSubmit={handleSubmit}>
             <div className="loginInput">
                 <label className="row">
-                    <h3>Username</h3>
-                    <input id="username" type="text" onChange={e=>setUsername(e.target.value)} placeholder='Mulch T. Booger'/>
+                    <h3>Student ID</h3>
+                    <input id="student-id" type="text" onChange={e=>setId(e.target.value)} placeholder='Mulch T. Booger'/>
                 </label>
                 <label className="row">
                     <h3>Password</h3>

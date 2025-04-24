@@ -16,9 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from app.api.views import CourseViewSet
+from app.api.views import CourseViewSet,LoginView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/courses/', CourseViewSet.as_view(), name='course-excel')
+    path('api/courses/', CourseViewSet.as_view(), name='course-excel'),
+    path('api/login/',LoginView,name='login')
 ]

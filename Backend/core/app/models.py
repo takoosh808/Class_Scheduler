@@ -17,19 +17,22 @@ class Course(models.Model):
         return self.class_name
     
 class Student(models.Model):
-    id_number = models.CharField(max_length=8)
-    name = models.CharField(max_length=30)
-    password = models.CharField(max_length = 30)
-    shoppingCart1 = models.CharField(max_length=8)
-    shoppingCart2 = models.CharField(max_length=8)
-    shoppingCart3 = models.CharField(max_length=8)
-    shoppingCart4 = models.CharField(max_length=8)
-    shoppingCart5 = models.CharField(max_length=8)
-    shoppingCart6 = models.CharField(max_length=8)
-    shoppingCart7 = models.CharField(max_length=8)
-    shoppingCart8 = models.CharField(max_length=8)
-    shoppingCart9 = models.CharField(max_length=8)
-    shoppingCart10 = models.CharField(max_length=8)
+    id_number = models.CharField(max_length=8,default = "-1", primary_key=True)
+    first_name = models.CharField(max_length=50, default="Jane")
+    last_name = models.CharField(max_length=50, default="Smith")
+    password = models.CharField(max_length = 50, default="abc123")
+
 
     def __str__(self):
-        return self.name  
+        return f"{self.first_name} {self.last_name}"  
+    class Meta:
+        db_table = 'student'
+    
+class Cart(models.Model):
+    student = models.ForeignKey('Student',on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+class CartItem(models.Model):
+    cart = models.ForeignKey(Cart,on_delete=models.CASCADE)
+    course = models.ForeignKey('Course',on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
