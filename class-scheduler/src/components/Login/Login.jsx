@@ -19,6 +19,7 @@ async function loginUser(credentials){
 export default function Login({setToken}) {
     const [id,setId] = useState();
     const [password, setPassword] = useState();
+    const [invalidPassword, setInvalidPassword] = useState(false);
     const handleSubmit = async e=>{
         e.preventDefault();
         const token = await loginUser({
@@ -26,6 +27,9 @@ export default function Login({setToken}) {
             password
         });
         setToken(token);
+        if(token?.error == 'Invalid password'){
+            setInvalidPassword(true);
+        }
     }
 
   return (
@@ -47,6 +51,9 @@ export default function Login({setToken}) {
                 <button className="col-xl-10"type="submit">Submit</button>
             </div>
         </form>
+        <div className='invalid_password' style={{display: invalidPassword ? 'flex': 'none'}}>
+            <p>Invalid username or password!</p>
+        </div>
         <div className="forgotContainer">
             <a href="http://youtube.com/" target="_blank" rel="noopener noreferrer">Forgot User ID?</a>
             <a href="http://youtube.com/" target="_blank" rel="noopener noreferrer">Forgot Password?</a>

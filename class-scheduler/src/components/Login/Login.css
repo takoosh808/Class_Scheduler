@@ -50,3 +50,10 @@
     margin-left: 7%;
     
 }
+
+.invalid_password{
+    color: red;
+    display: flex;
+    padding:15px;
+    margin-left:7%;
+}
