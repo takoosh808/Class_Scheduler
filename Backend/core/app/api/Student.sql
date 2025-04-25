@@ -1,41 +1,3 @@
--- CREATE DATABASE courseapp;
--- CREATE USER admin WITH PASSWORD 'Cpts322';
--- GRANT ALL PRIVILEGES ON DATABASE courseapp TO admin;
-
--- CREATE TABLE Student (
---     id_number VARCHAR(8) PRIMARY KEY,
---     first_name VARCHAR(50),
---     last_name VARCHAR(50),
---     password VARCHAR(50)
--- );
-
--- CREATE TABLE Courses (
---     Courseid VARCHAR(8) PRIMARY KEY,
---     CourseName VARCHAR(10),
---     CourseTime VARCHAR(4),
---     CourseDate VARCHAR(3)
--- );
-
--- -- CREATE TABLE Prerequisites (
--- --     Studentid VARCHAR(8) REFERENCES Student(id_number),
--- --     Courseid VARCHAR(8) REFERENCES Courses(Courseid),
--- -- );
-
--- CREATE TABLE Cart(
---     cart_id SERIAL PRIMARY KEY,
---     student_id VARCHAR(8) REFERENCES Student(id_number),
---     time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
--- );
-
--- CREATE TABLE CartItem(
---     item_id SERIAL PRIMARY KEY,
---     cart_id INTEGER REFERENCES Cart(cart_id),
---     course_id VARCHAR(8) REFERENCES Courses(Courseid),
---     quantity INTEGER DEFAULT 1
--- );
-
--- insert into StudentCourses (Studentid, Courseid) values ('49103962', '1000');
-
 insert into Student (id_number, first_name, last_name, password) values ('00123456','Jawn','Bautista','GYAT1234');
 insert into Student (id_number, first_name, last_name, password) values ('00140997', 'Arlen', 'Kreuzer', 'Vgzh5349');
 insert into Student (id_number, first_name, last_name, password) values ('00157714', 'Abbot', 'Guilleton', 'zHF2457');
@@ -283,14 +245,6 @@ insert into Student (id_number, first_name, last_name, password) values ('001959
 insert into Student (id_number, first_name, last_name, password) values ('00198856', 'Torry', 'Gounin', 'uT7565');
 insert into Student (id_number, first_name, last_name, password) values ('00185849', 'Lynelle', 'Leftwich', 'ftP1327');
 insert into Student (id_number, first_name, last_name, password) values ('00179368', 'Cal', 'Jeffryes', 'NXYfg9780');
-insert into Student (id_number, first_name, last_name, password) values ('00137240', 'Verine', 'Innott', 'SERhe2003');
 insert into Student (id_number, first_name, last_name, password) values ('00194521', 'Laverne', 'Eglese', 'HdrUa9774');
 insert into Student (id_number, first_name, last_name, password) values ('00172267', 'Glynnis', 'Splaven', 'JEm5997');
 insert into Student (id_number, first_name, last_name, password) values ('00180826', 'Grantham', 'Silvers', 'si7327');
-
-
-
--- insert into Courses (Courseid, CourseName, CourseTime, CourseLocation, CourseDate) values ('1000', 'Math 101', '3:15:00','MWF');
--- insert into Courses (Courseid, CourseName, CourseTime, CourseLocation, CourseDate) values ('1001', 'English 101', '3:15:00','MWF');
--- insert into Courses (Courseid, CourseName, CourseTime, CourseLocation, CourseDate) values ('1002', 'Cpts 101', '3:15:00','TTH');
--- insert into Courses (Courseid, CourseName, CourseTime, CourseLocation, CourseDate) values ('1003', 'Chemistry 101', '3:15:00','MWF');

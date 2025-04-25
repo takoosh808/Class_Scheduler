@@ -14,9 +14,16 @@ class CourseViewSet(APIView):
         excel_path = os.path.join(os.path.dirname(__file__), 'courses.xlsx')
         df = pd.read_excel(excel_path)
 
-        imported_courses = []
+        # course_data = df.to_dict(orient='records')
+        # return Response(course_data)
 
+        imported_courses = []
+        df = df.map(lambda x: x.strip() if isinstance(x,str) else x)
         for _, row in df.iterrows():
+            print(f"Checking row: {row.to_dict()}")
+            course_id = row['id_number']
+            if len(str(course_id)) > 10:
+                print(f"id_number too long: {course_id} ({len(str(course_id))})")
             course, created = Course.objects.get_or_create(
                 id_number=row['id_number'],  # Use this as unique ID or change as needed
                 defaults={
@@ -61,6 +68,7 @@ def LoginView(request):
         try:
             # Student.objects.create(id_number='12345678',first_name = 'Parteek',last_name='Kumar',password='1234')
             # print(Student.objects.all())
+            # print(Student._meta.db_table)
             student = Student.objects.get(id_number=id)
             if student.password == password:
                 return JsonResponse({'token':f"{id}"})
@@ -76,6 +84,7 @@ def UserView(request):
         data = json.loads(request.body)
         id = data.get('id')
         # print(Student.objects.filter(id_number=id))
+        # print(Student.objects.all())
         # print(f"ID:{id}")
         try:
             student = Student.objects.get(id_number=id)

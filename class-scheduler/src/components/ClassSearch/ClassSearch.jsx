@@ -44,7 +44,7 @@ const ClassSearch = () => {
   };
 
   const filteredCourses = searchInput.length > 0
-    ? courses.filter(course =>
+    ? courses?.filter(course =>
         course.class_name.toLowerCase().includes(searchInput.toLowerCase())
       )
     : courses;
@@ -68,7 +68,7 @@ const ClassSearch = () => {
             <th>Time</th>
             <th>Date</th>
         </tr>
-        {filteredCourses.map((course, index) => (
+        {filteredCourses?.map((course, index) => (
         <tr key={index} className="result">
           <td>{course.class_name}</td>
           <td>{course.Section_Number}</td>

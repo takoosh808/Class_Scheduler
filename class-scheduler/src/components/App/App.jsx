@@ -25,17 +25,19 @@ function App() {
   return (
     <BrowserRouter>
       <Header title="Shopping Cart"/>
-      <Sidebar />
-      <main>
-        <Routes>
-          <Route path="/shopping-cart" element={<ShoppingCart />}/>
-          <Route path="/weekly-schedule" element={<WeeklySchedule />} />
-          <Route path="/view-classes" element={<ViewClasses />}/>
-          <Route path="/class-search" element={<ClassSearch/>} />
-          <Route path="/enroll" element={<Enroll />} />
-          <Route path="/drop" element={<Drop />} />
-        </Routes>
-      </main>
+      <div className="app-container">
+        <Sidebar />
+        <main className="content-container">
+          <Routes>
+            <Route path="/shopping-cart" element={<ShoppingCart />}/>
+            <Route path="/weekly-schedule" element={<WeeklySchedule />} />
+            <Route path="/view-classes" element={<ViewClasses />}/>
+            <Route path="/class-search" element={<ClassSearch/>} />
+            <Route path="/enroll" element={<Enroll />} />
+            <Route path="/drop" element={<Drop />} />
+          </Routes>
+        </main>
+      </div>
     </BrowserRouter>
   );
 }

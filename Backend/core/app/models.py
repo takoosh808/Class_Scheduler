@@ -2,20 +2,21 @@ from django.db import models
 
 # Create your models here.
 class Course(models.Model):
-    class_name = models.CharField(max_length=20)
-    id_number = models.CharField(max_length=20)
+    class_name = models.CharField(max_length=50)
+    id_number = models.CharField(max_length=20,primary_key=True)
     IsLab = models.BooleanField(default=False)
     Section_Number = models.IntegerField(default=1)
-    Instructor = models.CharField(max_length=30, default='To Be Assigned')
+    Instructor = models.CharField(max_length=50, default='To Be Assigned')
     Date = models.CharField(max_length = 3)
     Time = models.CharField(max_length=4)
-    Location = models.CharField(max_length=30, default='To Be Assigned')
+    Location = models.CharField(max_length=50, default='To Be Assigned')
     Enrollment_max = models.IntegerField(default=100)
     Enrollment = models.IntegerField(default=0)
 
     def __str__(self):
         return self.class_name
-    
+    class Meta:
+        db_table = 'app_course'
 class Student(models.Model):
     id_number = models.CharField(max_length=8,default = "-1", primary_key=True)
     first_name = models.CharField(max_length=50, default="Jane")
@@ -27,7 +28,7 @@ class Student(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name}"  
     class Meta:
-        db_table = 'app_student'
+        db_table = 'student'
     
 class Cart(models.Model):
     student = models.ForeignKey('Student',on_delete=models.CASCADE)
