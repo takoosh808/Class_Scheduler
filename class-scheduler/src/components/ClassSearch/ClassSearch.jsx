@@ -6,11 +6,12 @@ const ClassSearch = () => {
 
   const [searchInput, setSearchInput] = useState("");
   const [courses, setCourses] = useState([]);
+  const [searchField, setSearchField] = useState('class_name');
 
   useEffect(() => {
     axios.get("http://127.0.0.1:8000/api/courses/")
       .then((response) => {
-        setCourses(response.data.imported);
+        setCourses(response.data);
       })
       .catch((error) => {
         console.error("Error fetching courses:", error);
@@ -32,7 +33,7 @@ const ClassSearch = () => {
     }
     axios.post("http://127.0.0.1:8000/api/cart/add/", {
       student_id: studentId,
-      course_id: courseId
+      course_id: courseId,
     })
     .then((response) => {
       alert("Course added to cart!");
@@ -43,21 +44,40 @@ const ClassSearch = () => {
     });
   };
 
-  const filteredCourses = searchInput.length > 0
-    ? courses?.filter(course =>
-        course.class_name.toLowerCase().includes(searchInput.toLowerCase())
-      )
-    : courses;
+  const handleSearchFieldChange = (e) => {
+    setSearchField(e.target.value);
+  };
+
+  const filteredCourses = courses.filter(course => {
+    if (!searchInput) return true;
+    const fieldValue = course[searchField];
+    if (fieldValue) {
+      return fieldValue.toLowerCase().includes(searchInput.toLowerCase());
+    }
+    return false;
+  });
 
   return (<div>
 
-    <input
-      type="search"
-      placeholder="Search here"
-      className="input"
-      onChange={handleChange}
-      value={searchInput} 
-      />
+      <div className="searchInputs">
+        <select value={searchField} onChange={handleSearchFieldChange} className="input">
+          <option value="class_name">Course Name</option>
+          <option value="Time">Time</option>
+          <option value="Date">Date</option>
+          <option value="Instructor">Instructor</option>
+          <option value="Location">Location</option>
+        </select>
+
+        <input
+          type="text"
+          placeholder={`Search by ${searchField.replace('_', ' ')}`}
+          value={searchInput}
+          onChange={handleChange}
+          className="input"
+        />
+      </div>
+
+
     <table className="searchWrapper">
         <tr className = "title">
             <th>Course Name</th>
@@ -68,7 +88,7 @@ const ClassSearch = () => {
             <th>Time</th>
             <th>Date</th>
         </tr>
-        {filteredCourses?.map((course, index) => (
+        {filteredCourses.map((course, index) => (
         <tr key={index} className="result">
           <td>{course.class_name}</td>
           <td>{course.Section_Number}</td>
