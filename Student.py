@@ -15,8 +15,8 @@ class Student(User):
             self.AddToShoppingCart(course)
 
     # Returns the contents of shopping cart, in a string.
-    # def GetShoppingCart(self):
-    #     return ",".join(self.ShoppingCart.GetClasses())
+    def GetShoppingCart(self):
+        return ",".join(self.ShoppingCart.GetClasses())
 
     # Drops a class given the course ID. Returns bool indicating whether successful or not.
     def DropClass(self, class_id: str):
@@ -41,7 +41,7 @@ class Student(User):
         return self.ShoppingCart.RemoveClass(class_id)
 
     # Enroll in classes in shopping cart. Returns bool indicating whether enrollment successful or not.
-    def Enroll(self): # NEEDS TO CHECK TIME CONFLICT AGAIN
+    def Enroll(self):
         if not self.ShoppingCart.CheckClassConflict():
             for class_id in self.ShoppingCart.FutureCourses:
                 if class_id in self.CurrentClasses:

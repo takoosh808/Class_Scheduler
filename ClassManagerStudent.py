@@ -5,7 +5,7 @@ from models import Course, Student
 import json
 
 
-def CreateStudent(student_ID:str): #NOT YET WORKING
+def CreateStudent(student_ID:str):
     obj = Student.objects.get(id_number = student_ID)
     shoppingCartList = []
     shoppingCartList += obj.shoppingCart1
@@ -20,11 +20,11 @@ def CreateStudent(student_ID:str): #NOT YET WORKING
     shoppingCartList += obj.shoppingCart10
     return Student(obj.id_number, obj.password, student_ID, obj.name, 1)
 
-def CreateClass(class_id:str):#NOT YET WORKING
-    return Class(class_id, [], "Time", "Location", 100)
+def CreateClass(class_id:str, pre_req:list, time:str, location:str, seats:int):
+    return Class(class_id, pre_req, time, location, seats)
 
 class ClassManagerStudent:
-    def __init__(self, student_ID:str): #pass in database?
+    def __init__(self, student_ID:str):
         self.student = CreateStudent(student_ID)# find and create student instance from student ID
 
 # Returns true or false indicating success.
@@ -49,9 +49,11 @@ class ClassManagerStudent:
 # Returns true or false indicating success.
     def DropClass(self, class_ID: str):
         return json.load(json.dumps(self.student.DropClass(class_ID)))
-        #Change seat avaibility
 
 # Returns true or false indicating success.
     def Enroll(self):
         return json.load(json.dumps(self.student.Enroll()))
-        #change seat avaibility
+
+# Returns all classes with the name.
+    def SearchClass(class_name:str):
+        return json.load(json.dumps(Class.objects.get(class_name = class_name)))

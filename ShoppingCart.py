@@ -24,21 +24,8 @@ class ShoppingCart:
     def GetClasses(self):
         return self.FutureCourses
 
-    def CheckClassConflict(self): #NOT YET WORKING - returns if there is class time conflicts
-        return False
+    def CheckClassConflict(self):
+        return len(self.FutureCourses) == len(set(self.FutureCourses))
     
     def ClearCart(self):
         self.FutureCourses = []
-
-        
-
-    # def EnrollClasses(self): #NOT YET WORKING - needs conflict checks
-    #     for class_id in self.FutureCourses:
-    #         if (True): # Place holder for conflict checks
-    #             #Place holder success message
-    #             print(f"Enrolled in {class_id}.")
-    #             return self.FutureCourses
-    #         else:
-    #             # Place holder error message
-    #             print(f"Already enrolled in {class_id}.")
-    #     self.FutureCourses.clear()  # Clear cart after enrollment
