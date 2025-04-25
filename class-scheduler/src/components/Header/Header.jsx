@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Header.css'
+import './UserSettings'
+import UserSettings from './UserSettings';
 
 
 async function getUser(id){
@@ -56,15 +58,12 @@ export default function Header({title="title"}) {
             <div className="col-lg-10">
                 <h1>{title}</h1>
             </div>
-            <div className="col-lg">
+            <div className="col-lg-auto">
                 <span className="int-icon icon-basket" onClick={e=>{
                     e.stopPropagation();
                     handleBasketClick();
                 }}></span>
-                <span className="int-icon icon-user" onClick={e=>{
-                    e.stopPropagation();
-                    handleProfileClick();
-                }}></span>
+                <UserSettings />
             </div>
             
         </div>
