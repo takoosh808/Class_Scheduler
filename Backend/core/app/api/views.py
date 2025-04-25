@@ -5,7 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from rest_framework.response import Response
 import pandas as pd
-import os,json
+import os,json, logging
 
 class CourseViewSet(APIView):
     def get(self, request):
@@ -29,9 +29,23 @@ def LoginView(request):
             # print(Student.objects.all())
             student = Student.objects.get(id_number=id)
             if student.password == password:
-                return JsonResponse({'token':'abc123'})
+                return JsonResponse({'token':f"{id}"})
             else:
                 return JsonResponse({'error':'Invalid password'},status=400)
         except Student.DoesNotExist:
             return JsonResponse({'error':'Student does not exist!'},status=404)
     return JsonResponse({'error':'Invalid response'},status=400)
+
+@csrf_exempt
+def UserView(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        id = data.get('id')
+        # print(Student.objects.filter(id_number=id))
+        # print(f"ID:{id}")
+        try:
+            student = Student.objects.get(id_number=id)
+            return JsonResponse({'user':f"{student.first_name} {student.last_name}"})
+        except Student.DoesNotExist:
+            logging.warning(f"Error retrieving student: {id}")
+            return JsonResponse({'error':f'Could not retrieve student: {id}'})
