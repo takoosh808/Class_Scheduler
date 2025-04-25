@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import './Login.css'
 
 async function loginUser(credentials){
-    return fetch('http://localhost:8080/login',{
+    console.log(credentials)
+    return fetch('http://localhost:8000/api/login/',{
         method:'POST',
         headers:{
             'Content-Type' : 'application/json'
@@ -16,15 +17,21 @@ async function loginUser(credentials){
 
 
 export default function Login({setToken}) {
-    const [username,setUsername] = useState();
+    const [id,setId] = useState();
     const [password, setPassword] = useState();
+    const [invalidPassword, setInvalidPassword] = useState(false);
     const handleSubmit = async e=>{
         e.preventDefault();
         const token = await loginUser({
-            username,
+            id,
             password
         });
         setToken(token);
+        localStorage.setItem("student_id", token.token);
+        console.log(token.token)
+        if(token?.error == 'Invalid password'){
+            setInvalidPassword(true);
+        }
     }
 
   return (
@@ -34,8 +41,8 @@ export default function Login({setToken}) {
         <form className="loginForm" onSubmit={handleSubmit}>
             <div className="loginInput">
                 <label className="row">
-                    <h3>Username</h3>
-                    <input id="username" type="text" onChange={e=>setUsername(e.target.value)} placeholder='Mulch T. Booger'/>
+                    <h3>Student ID</h3>
+                    <input id="student-id" type="text" onChange={e=>setId(e.target.value)} placeholder='Mulch T. Booger'/>
                 </label>
                 <label className="row">
                     <h3>Password</h3>
@@ -46,6 +53,9 @@ export default function Login({setToken}) {
                 <button className="col-xl-10"type="submit">Submit</button>
             </div>
         </form>
+        <div className='invalid_password' style={{display: invalidPassword ? 'flex': 'none'}}>
+            <p>Invalid username or password!</p>
+        </div>
         <div className="forgotContainer">
             <a href="http://youtube.com/" target="_blank" rel="noopener noreferrer">Forgot User ID?</a>
             <a href="http://youtube.com/" target="_blank" rel="noopener noreferrer">Forgot Password?</a>

@@ -1,10 +1,40 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Header.css'
+import './UserSettings'
+import UserSettings from './UserSettings';
 
 
+async function getUser(id){
+    const response =  await fetch('http://localhost:8000/api/getuser/',{
+        method:'POST',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify({id}),
+    });
+    return response.json();
+}
 export default function Header({title="title"}) {
+    const [name,setName] = useState('')
     const navigate = useNavigate();
+
+    useEffect(()=>{
+        const tokenData = JSON.parse(sessionStorage.getItem('token'));
+        const id = tokenData?.token;
+        if (id){
+            getUser(id).then(data=>{
+                if(data.user){
+                    setName(data.user)
+                }
+                else{
+                    setName("Guest User");
+                }
+            });
+        }
+    },[]);
+
     function handleHamburgerClick(){
         console.log("Menu clicked");
     }
@@ -14,9 +44,8 @@ export default function Header({title="title"}) {
     }
     function handleProfileClick(){
         console.log("Profile clicked");
+        // console.log(`Name ${getUser(id)}`);
     }
-
-
   return (
     <div id="header" className="container-fluid ">
         <div className="row main-line">
@@ -29,20 +58,17 @@ export default function Header({title="title"}) {
             <div className="col-lg-10">
                 <h1>{title}</h1>
             </div>
-            <div className="col-lg">
+            <div className="col-lg-auto">
                 <span className="int-icon icon-basket" onClick={e=>{
                     e.stopPropagation();
                     handleBasketClick();
                 }}></span>
-                <span className="int-icon icon-user" onClick={e=>{
-                    e.stopPropagation();
-                    handleProfileClick();
-                }}></span>
+                <UserSettings />
             </div>
             
         </div>
         <div className="row">
-            <b className="user-text">Logged in as user: User1</b>
+            <b className="user-text">Logged in as user: {name}</b>
         </div>
     </div>
   )
