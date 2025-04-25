@@ -1,5 +1,10 @@
 @import "../../assets/css/variables.css";
 
+.searchBody{
+    height: calc(100vh - 100px);
+    overflow-y: auto;
+}
+
 .searchInputs {
     display: flex;
     gap: 10px;
@@ -20,10 +25,10 @@
 }
 
 .searchWrapper{
+    height: calc(100vh - 100px);
     color:black;
     margin-left: 300px;
     margin-top: 10px;
-    height:fit-content;
     width:875px;
     background-color: white;
 }

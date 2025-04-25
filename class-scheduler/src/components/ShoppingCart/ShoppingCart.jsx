@@ -33,7 +33,6 @@ const Cart = () => {
     .then(response => {
       const message = response.data.message || "Enrolled successfully.";
       alert(message);
-      setCartItems(prev => prev.filter(item => item.id_number !== courseId));
     })
     .catch(error => {
       if (error.response) {
@@ -42,6 +41,16 @@ const Cart = () => {
       } else {
         alert("Network error or server unavailable.");
       }
+    });
+    axios.post("http://localhost:8000/api/cart/remove/", {
+      student_id: studentId, // or your context variable
+      course_id: courseId
+    })
+    .then(res => {
+      setCartItems(prev => prev.filter(item => item.id_number !== courseId));
+    })
+    .catch(err => {
+      console.error("Remove failed:", err);
     });
   };
 

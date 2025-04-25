@@ -57,7 +57,7 @@ const ClassSearch = () => {
     return false;
   });
 
-  return (<div>
+  return (<div className = "searchBody">
 
       <div className="searchInputs">
         <select value={searchField} onChange={handleSearchFieldChange} className="input">
