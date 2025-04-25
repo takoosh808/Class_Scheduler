@@ -11,43 +11,23 @@ import os,json, logging
 
 class CourseViewSet(APIView):
     def get(self, request):
-        excel_path = os.path.join(os.path.dirname(__file__), 'courses.xlsx')
-        df = pd.read_excel(excel_path)
-
-        imported_courses = []
-
-        for _, row in df.iterrows():
-            course, created = Course.objects.get_or_create(
-                id_number=row['id_number'],  # Use this as unique ID or change as needed
-                defaults={
-                    'class_name': row['class_name'],
-                    'Section_Number': row['Section_Number'],
-                    'Instructor': row.get('Instructor', 'TBA'),
-                    'Date': row.get('Date', ''),
-                    'Time': row.get('Time', ''),
-                    'Location': row.get('Location', 'TBA'),
-                    'Enrollment_max': row.get('Enrollment_max', 100),
-                    'Enrollment': row.get('Enrollment', 0),
-                    'IsLab': row.get('IsLab', False)
-                }
-            )
-            imported_courses.append({
-                'class_name': course.class_name,
+        courses = Course.objects.all()
+        data = [
+            {
                 'id_number': course.id_number,
+                'class_name': course.class_name,
                 'Section_Number': course.Section_Number,
-                    'Instructor': course.Instructor,
-                    'Date': course.Date,
-                    'Time': course.Time,
-                    'Location': course.Location,
-                    'Enrollment_max': course.Enrollment_max,
-                    'Enrollment': course.Enrollment,
-                    'IsLab': course.IsLab
-            })
-
-        return Response({
-            'message': 'Courses imported successfully.',
-            'imported': imported_courses
-        })
+                'Instructor': course.Instructor,
+                'Date': course.Date,
+                'Time': course.Time,
+                'Location': course.Location,
+                'Enrollment_max': course.Enrollment_max,
+                'Enrollment': course.Enrollment,
+                'IsLab': course.IsLab
+            }
+            for course in courses
+        ]
+        return Response(data)
     
 @csrf_exempt
 def LoginView(request):
@@ -123,6 +103,10 @@ def view_cart(request, student_id):
             {
                 'course_name': item.course.class_name,
                 'id_number': item.course.id_number,
+                'date': item.course.Date,
+                'time': item.course.Time,
+                'location': item.course.Location,
+                'instructor': item.course.Instructor,
                 'quantity': item.quantity,
             }
             for item in items
@@ -136,37 +120,49 @@ def view_cart(request, student_id):
 
 @api_view(['POST'])
 def enroll_courses(request):
-    print("Received data:", request.data)
     student_id = request.data.get('student_id')
-    if not student_id:
-        return JsonResponse({'error': 'student_id missing'}, status=400)
+    course_id = request.data.get('course_id') 
 
     try:
         student = Student.objects.get(id_number=student_id)
-        cart = Cart.objects.get(student=student)
-        cart_items = CartItem.objects.filter(cart=cart)
+        new_course = Course.objects.get(id_number=course_id)
+        
+        currently_enrolled = student.enrolled_courses.all()
 
-        enrolled = []
+        # Check for direct duplicate enrollment
+        if currently_enrolled.filter(id_number=new_course.id_number).exists():
+            return Response({
+                "message": "Already enrolled in this course."
+            }, status=400)
 
-        for item in cart_items:
-            course = item.course
+        if student.enrolled_courses.filter(class_name=new_course.class_name).exists():
+            return Response({
+                "message": f"Already enrolled in a section of {new_course.class_name}."
+            }, status=400)
 
-            if course.Enrollment < course.Enrollment_max:
-                student.enrolled_courses.add(course)
-                course.Enrollment += 1
-                course.save()
-                enrolled.append(course.class_name)
+        # Check for day and time conflicts
+        for enrolled_course in currently_enrolled:
+            # Shared day?
+            for day in enrolled_course.Date:
+                if day in new_course.Date:
+                    # Now also check if time matches
+                    if enrolled_course.Time == new_course.Time:
+                        return Response({
+                            "message": f"Time conflict with {enrolled_course.class_name} on {day} at {new_course.Time}."
+                        }, status=400)
 
-        # Clear cart after enrolling
-        cart_items.delete()
+        student.enrolled_courses.add(new_course)
 
-        return JsonResponse({'message': 'Enrollment successful', 'enrolled_courses': enrolled})
+        return Response({
+            "message": f"Successfully enrolled in {new_course.class_name}."
+        })
 
     except Student.DoesNotExist:
-        return JsonResponse({'error': 'Student not found'}, status=404)
-
+        return Response({'error': 'Student not found'}, status=404)
+    except Course.DoesNotExist:
+        return Response({'error': 'Course not found'}, status=404)
     except Exception as e:
-        return JsonResponse({'error': str(e)}, status=500)
+        return Response({'error': str(e)}, status=500)
     
 @api_view(['GET'])
 def view_enrolled_courses(request, student_id):
@@ -190,3 +186,68 @@ def view_enrolled_courses(request, student_id):
 
     except Student.DoesNotExist:
         return Response({"error": "Student not found"}, status=404)
+
+@csrf_exempt
+@api_view(['POST'])
+def remove_from_cart(request):
+    student_id = request.data.get('student_id')
+    course_id = request.data.get('course_id')
+    
+
+    try:
+        student = Student.objects.get(id_number=student_id)
+        cart = Cart.objects.get(student=student)
+        print(" Cart ID:", cart.id)
+        print(" Course ID to remove:", course_id)
+        print("CartItem course ID:", CartItem.objects.select_related('course').all())            # should be a string
+
+        cart_item = CartItem.objects.get(cart=cart, course_id=course_id)
+        cart_item.delete()
+
+        return Response({"message": "Course removed from cart."})
+    except CartItem.DoesNotExist:
+        return Response({'error': 'Course not found in cart'}, status=404)
+    except Student.DoesNotExist:
+        return Response({'error': 'Student not found'}, status=404)
+
+    except CartItem.DoesNotExist:
+        return Response({'error': 'Course not found in cart'}, status=404)
+
+    except Exception as e:
+        return Response({'error': str(e)}, status=500)
+    
+@api_view(["POST"])
+def drop_class(request):
+    student_id = request.data.get('student_id')
+    course_ids = request.data.get('course_ids', [])  # expecting a list
+
+    try:
+        student = Student.objects.get(id_number=student_id)
+
+        dropped_courses = []
+        not_enrolled_courses = []
+
+        for course_id in course_ids:
+            try:
+                course = Course.objects.get(id_number=course_id)
+
+                if student.enrolled_courses.filter(id_number=course_id).exists():
+                    student.enrolled_courses.remove(course)
+                    dropped_courses.append(course.class_name)
+                else:
+                    not_enrolled_courses.append(course.class_name)
+
+            except Course.DoesNotExist:
+                not_enrolled_courses.append(f"Unknown Course ID: {course_id}")
+
+        return Response({
+            "message": "Drop operation completed.",
+            "dropped_courses": dropped_courses,
+            "not_enrolled_courses": not_enrolled_courses
+        })
+
+    except Student.DoesNotExist:
+        return Response({'error': 'Student not found'}, status=404)
+    except Exception as e:
+        return Response({'error': str(e)}, status=500)
+    
