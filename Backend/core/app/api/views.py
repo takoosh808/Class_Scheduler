@@ -251,3 +251,54 @@ def drop_class(request):
     except Exception as e:
         return Response({'error': str(e)}, status=500)
     
+@api_view(["GET"])
+def view_schedule(request, student_id):
+    try:
+        student = Student.objects.get(id_number=student_id)
+        courses = student.enrolled_courses.all()
+
+        schedule = {day: [] for day in ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday',]}
+
+        day_mappings = {
+            'MWF': ['Monday', 'Wednesday', 'Friday'],
+            'MW': ['Monday', 'Wednesday'],
+            'TTH': ['Tuesday', 'Thursday'],
+            'TU': ['Tuesday'],
+            'TH': ['Thursday'],
+            'M': ['Monday'],
+            'T': ['Tuesday'],
+            'W': ['Wednesday'],
+            'F': ['Friday'],
+        }
+
+        def parse_days(date_str):
+            parsed_days = []
+            date_str = date_str.upper()
+            for code, days in day_mappings.items():
+                if code in date_str:
+                    parsed_days.extend(days)
+                    
+                    date_str = date_str.replace(code, '', 1)
+            return parsed_days
+
+        for course in courses:
+            days = parse_days(course.Date)
+            for day in days:
+                if day in schedule:
+                    schedule[day].append({
+                        "class_name": course.class_name,
+                        "id_number": course.id_number,
+                        "time": course.Time,
+                        "location": course.Location,
+                        "instructor": course.Instructor,
+                    })
+
+        for day in schedule:
+            schedule[day].sort(key=lambda x: x['time'])
+
+        return Response({"weekly_schedule": schedule})
+
+    except Student.DoesNotExist:
+        return Response({'error': 'Student not found'}, status=404)
+    except Exception as e:
+        return Response({'error': str(e)}, status=500)

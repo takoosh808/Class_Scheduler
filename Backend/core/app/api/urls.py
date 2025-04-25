@@ -1,7 +1,7 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from .views import CourseViewSet,LoginView,UserView, add_to_cart, view_cart, enroll_courses, view_enrolled_courses
-from .views import remove_from_cart, drop_class
+from .views import remove_from_cart, drop_class, view_schedule
 
 router = DefaultRouter()
 
@@ -16,4 +16,5 @@ urlpatterns = [
     path('api/drop/', drop_class,name='drop_class'),
     path('api/cart/<str:student_id>/', view_cart, name='view_cart'),
     path('api/enrolled/<str:student_id>/', view_enrolled_courses,name='view_enrolled_courses'),
+    path('api/schedule/<str:student_id>/', view_schedule, name='view_schedule'),
 ]
