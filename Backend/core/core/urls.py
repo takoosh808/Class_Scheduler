@@ -16,11 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from app.api.views import CourseViewSet,LoginView,UserView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/courses/', CourseViewSet.as_view(), name='course-excel'),
-    path('api/login/',LoginView,name='login'),
-    path('api/getuser/',UserView,name='user')
+    path('',include('app.api.urls'))
 ]

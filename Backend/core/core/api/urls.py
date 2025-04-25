@@ -6,5 +6,5 @@ router = DefaultRouter()
 router.registry.extend(course_router.registry)
 
 urlpatterns = [
-    path('', include(router.urls))
+    path('', include('app.urls')),
 ]

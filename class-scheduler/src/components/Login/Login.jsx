@@ -27,6 +27,8 @@ export default function Login({setToken}) {
             password
         });
         setToken(token);
+        localStorage.setItem("student_id", token.token);
+        console.log(token.token)
         if(token?.error == 'Invalid password'){
             setInvalidPassword(true);
         }

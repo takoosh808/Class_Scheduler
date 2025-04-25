@@ -10,7 +10,7 @@ const ClassSearch = () => {
   useEffect(() => {
     axios.get("http://127.0.0.1:8000/api/courses/")
       .then((response) => {
-        setCourses(response.data);
+        setCourses(response.data.imported);
       })
       .catch((error) => {
         console.error("Error fetching courses:", error);
@@ -21,6 +21,26 @@ const ClassSearch = () => {
   const handleChange = (e) => {
     e.preventDefault();
     setSearchInput(e.target.value);
+  };
+
+  const handleAddToCart = (courseId) => {
+    const studentId = localStorage.getItem("student_id");
+  
+    if (!studentId) {
+      alert("You must be logged in to add courses.");
+      return;
+    }
+    axios.post("http://127.0.0.1:8000/api/cart/add/", {
+      student_id: studentId,
+      course_id: courseId
+    })
+    .then((response) => {
+      alert("Course added to cart!");
+    })
+    .catch((error) => {
+      console.error("Error adding to cart:", error);
+      alert("Failed to add course to cart.");
+    });
   };
 
   const filteredCourses = searchInput.length > 0
@@ -57,6 +77,9 @@ const ClassSearch = () => {
           <td>{course.id_number}</td>
           <td>{course.Time}</td>
           <td>{course.Date}</td>
+          <td>
+          <button onClick={() => handleAddToCart(course.id_number)}>Add to Cart</button>
+          </td>
         </tr>
         ))}
     </table>
