@@ -1,3 +1,4 @@
+insert into Student (id_number, first_name, last_name, password) values ('00146289', 'Ritvik', 'Sharma', 'Superstar2001');
 insert into Student (id_number, first_name, last_name, password) values ('00123456','Jawn','Bautista','GYAT1234');
 insert into Student (id_number, first_name, last_name, password) values ('00140997', 'Arlen', 'Kreuzer', 'Vgzh5349');
 insert into Student (id_number, first_name, last_name, password) values ('00157714', 'Abbot', 'Guilleton', 'zHF2457');
