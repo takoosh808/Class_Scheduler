@@ -30,3 +30,15 @@
 .icon-user{
     margin-left:25px
 }
+
+.logout-btn {
+    background-color: rgba(9, 185, 103, 0.726);
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    margin-left: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    outline-color: white;
+    cursor: pointer;
+}

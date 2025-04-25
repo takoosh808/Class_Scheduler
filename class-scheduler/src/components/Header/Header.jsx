@@ -44,6 +44,10 @@ export default function Header({title="title"}) {
         console.log("Profile clicked");
         // console.log(`Name ${getUser(id)}`);
     }
+    function handleLogoutClick() {
+        sessionStorage.clear();
+        navigate('/login');  // Redirect to login page
+    }
   return (
     <div id="header" className="container-fluid ">
         <div className="row main-line">
@@ -52,6 +56,7 @@ export default function Header({title="title"}) {
                     e.stopPropagation();
                     handleHamburgerClick();
                     }}></span>
+                    
             </div>
             <div className="col-lg-10">
                 <h1>{title}</h1>
@@ -65,6 +70,10 @@ export default function Header({title="title"}) {
                     e.stopPropagation();
                     handleProfileClick();
                 }}></span>
+                <button className="logout-btn" onClick={handleLogoutClick}>
+                        Logout
+                    </button>
+                    
             </div>
             
         </div>
